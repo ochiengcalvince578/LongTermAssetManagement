@@ -49,8 +49,8 @@ table 50013 "Custom Sales Lines"
 
         field(5; "Unit No"; Code[20])
         {
-            //TableRelation = Unit WHERE("Block No" = FIELD("Property No"));
-            TableRelation = Unit;
+            TableRelation = Unit WHERE("Block No" = FIELD("Property No"));
+            //TableRelation = Unit;
 
             trigger OnValidate()
 

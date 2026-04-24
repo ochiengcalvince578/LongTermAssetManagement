@@ -15,7 +15,13 @@ page 50007 "Unit List"
 
             repeater(Control1)
             {
-                field(No; Rec.No)
+
+                field("Block No"; Rec."Block No")
+                {
+
+                }
+
+                field("Unit No"; Rec.No)
                 {
 
                 }
@@ -25,10 +31,10 @@ page 50007 "Unit List"
 
                 }
 
-                field("Unit No"; Rec."Unit No")
-                {
+                // field("Unit No"; Rec."Unit No")
+                // {
 
-                }
+                // }
 
                 field(Price; Rec.Price)
                 {

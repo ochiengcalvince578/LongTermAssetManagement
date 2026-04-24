@@ -10,8 +10,6 @@ table 50005 Unit
         }
 
 
-
-
         field(2; Price; Decimal)
         {
 
@@ -27,10 +25,10 @@ table 50005 Unit
 
         }
 
-        field(5; "Unit No"; Code[50])
-        {
+        // field(5; "Unit No"; Code[50])
+        // {
 
-        }
+        // }
 
         field(6; Type; Option)
         {
@@ -57,9 +55,35 @@ table 50005 Unit
 
         }
 
+        field(10; Status; Option)
+        {
+            OptionMembers = "Available","Active","Complete";
+
+        }
 
 
+        field(11; Stage; Option)
+        {
 
+            OptionMembers = "Advertising","Sold";
+
+        }
+
+
+    }
+
+    Keys
+    {
+
+        key(Pkey; No, "Block No")
+        {
+
+        }
+
+        key(Skey; No)
+        {
+
+        }
     }
 
 }

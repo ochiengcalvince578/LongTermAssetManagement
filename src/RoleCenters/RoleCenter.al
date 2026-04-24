@@ -5,15 +5,24 @@ Page 50008 "Main Role Center"
 
     layout
     {
-
         area(RoleCenter)
         {
 
-            part("All Customers"; "Customers Cue")
+            part("Customers1"; "Customers Cue")
             {
 
                 ApplicationArea = Basic, Suite;
                 Visible = true;
+                Caption = 'Customers';
+
+            }
+
+            part("Employees"; "Employees Cue")
+            {
+
+                ApplicationArea = Basic, Suite;
+                Visible = true;
+                Caption = 'Employees';
 
             }
 
@@ -136,13 +145,12 @@ Page 50008 "Main Role Center"
                         Image = Journal;
                         RunObject = Page "G/L Account Categories";
 
-
                     }
                 }
             }
             group("Property Management")
             {
-                group("Housing")
+                group("Housing Projects")
                 {
 
                     group("Properties")
@@ -160,6 +168,7 @@ Page 50008 "Main Role Center"
                         {
                             Caption = 'Units';
                             RunObject = Page "Unit List";
+                            Visible = false;
                         }
 
                     }
@@ -195,13 +204,15 @@ Page 50008 "Main Role Center"
                         // }
                     }
 
-
-
-
                 }
 
 
-                group("Land")
+                group("Land Projects")
+                {
+
+                }
+
+                group("Other Projects")
                 {
 
                 }

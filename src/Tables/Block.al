@@ -81,6 +81,83 @@ table 50003 Block
 
         }
 
+        field(13; "Three - Bedroom Cost"; Decimal)
+        {
+
+        }
+
+        field(14; "Two - Bedroom Cost"; Decimal)
+        {
+
+        }
+
+        field(15; "Townhouse Cost"; Decimal)
+        {
+
+        }
+
+        field(16; "Three - Bedroom Units"; Decimal)
+        {
+
+        }
+
+        field(17; "Two - Bedroom Units"; Decimal)
+        {
+
+        }
+
+
+        field(18; "Townhouses"; Decimal)
+        {
+
+        }
+
+        field(19; "Electricity Charge Townhouse"; Decimal)
+        {
+
+        }
+
+        field(20; "Water Charge Townhouse"; Decimal)
+        {
+
+        }
+
+        field(21; "Legal Charge Townhouse"; Decimal)
+        {
+
+        }
+
+        field(22; "Electricity Charge 2b"; Decimal)
+        {
+
+        }
+
+        field(23; "Water Charge 2b"; Decimal)
+        {
+
+        }
+
+
+        field(24; "Legal Charge 2b"; Decimal)
+        {
+
+        }
+
+        field(25; "Water Charge 3b"; Decimal)
+        {
+
+        }
+
+        field(26; "Electricity Charge 3b"; Decimal)
+        {
+
+        }
+
+        field(27; "Legal Charge 3b"; Decimal)
+        {
+
+        }
+
 
     }
 

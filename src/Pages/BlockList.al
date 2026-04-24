@@ -28,7 +28,6 @@ page 50006 "Block List"
                 field(Units; Rec.Units)
                 {
                     Caption = 'No of Units';
-
                 }
 
                 field("Unit Cost"; Rec."Unit Cost")

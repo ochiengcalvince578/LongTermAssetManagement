@@ -70,9 +70,6 @@ table 50011 "Custom Sales Header"
 
                 If BlockRec.FindFirst() then
                     "Project Name" := BlockRec.Description;
-
-
-
             end;
         }
 
@@ -81,7 +78,64 @@ table 50011 "Custom Sales Header"
 
         }
 
+        field(12; "Responsible Employee"; Code[20])
+        {
+            TableRelation = Employee;
+        }
 
+        field(13; "Bank Account Code"; Code[20])
+        {
+
+            TableRelation = "Bank Account";
+
+            trigger OnValidate()
+            var
+                BankAccountRec: Record "Bank Account";
+            begin
+
+                BankAccountRec.Reset();
+                BankAccountRec.SetRange("No.", "Bank Account Code");
+
+                If BankAccountRec.FindFirst() then begin
+
+                    "Bank Account Name" := BankAccountRec.Name;
+
+                end;
+
+            end;
+
+        }
+
+        field(14; "Bank Account Name"; Text[50])
+
+        {
+
+        }
+
+        field(15; "Repayment Period"; Option)
+        {
+            OptionMembers = "Monthly","Daily","Annually";
+
+        }
+
+        field(16; "Installments"; Integer)
+        {
+
+        }
+
+        // Interest Rate
+        field(17; "Interest Rate"; Decimal)
+        {
+
+        }
+
+        field(18; "Unit No."; Code[20])
+        {
+
+            //TableRelation = Unit;
+            TableRelation = Unit where("Block No" = field("Project No"), Status = const(Available));
+
+        }
 
     }
 
