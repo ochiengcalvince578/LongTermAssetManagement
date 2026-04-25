@@ -31,7 +31,9 @@ table 50016 "Repayment Schedule"
 
         field(11; "Project Name"; Text[100]) { }
 
+        field(12; "Customer No."; Code[20]) { }
 
+        field(13; "Customer Name"; Text[100]) { }
     }
 
     keys

@@ -97,6 +97,28 @@ Page 50008 "Main Role Center"
 
             group("Finance Management")
             {
+
+                Group("Receipt Processing")
+                {
+
+                    action("Receipt List")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Image = Receipt;
+                        RunObject = page "Receipt List";
+                    }
+
+                    action("Posted Receipt List")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        RunObject = page "Receipt List";
+                        RunPageView = where(Posted = const(true));
+                    }
+
+                }
+
+
+
                 action("General Journals")
                 {
                     ApplicationArea = Basic, Suite;
@@ -144,7 +166,6 @@ Page 50008 "Main Role Center"
 
                         Image = Journal;
                         RunObject = Page "G/L Account Categories";
-
                     }
                 }
             }

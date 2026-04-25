@@ -125,8 +125,6 @@ page 50012 "Property Sale Card"
 
                     LoanAmount: Decimal;
                     UnitRec: Record Unit;
-
-
                 begin
 
                     Rec.TestField("Customer No");
@@ -354,7 +352,7 @@ page 50012 "Property Sale Card"
 
                 LoanAmount := UnitRec99.Price * 0.75;
 
-                FnCreatePaymentSchedule(LoanAmount, Rec.Installments, Rec."Interest Rate", ProjectRec.No, Rec."Unit No.", Rec."Posting Date", Rec."Project Name");
+                FnCreatePaymentSchedule(LoanAmount, Rec.Installments, Rec."Interest Rate", ProjectRec.No, Rec."Unit No.", Rec."Posting Date", Rec."Project Name", Rec."Customer No", Rec."Customer Name");
 
             end;
 
@@ -476,7 +474,7 @@ page 50012 "Property Sale Card"
     end;
 
 
-    local procedure FnCreatePaymentSchedule(LoanAmount: Decimal; Installments: Integer; InterestRate: Decimal; ProjectCode: Code[20]; UnitCode: Code[20]; RepaymentStartDate: Date; Projectname: Text[100])
+    local procedure FnCreatePaymentSchedule(LoanAmount: Decimal; Installments: Integer; InterestRate: Decimal; ProjectCode: Code[20]; UnitCode: Code[20]; RepaymentStartDate: Date; Projectname: Text[100]; CustomerNo: Code[20]; CustomerName: Text[100])
 
     var
 
@@ -532,6 +530,8 @@ page 50012 "Property Sale Card"
 
             //Init a Schedule record
             ScheduleRec.Init;
+            ScheduleRec."Customer No." := CustomerNo;
+            ScheduleRec."Customer Name" := CustomerName;
             ScheduleRec.ProjectNo := ProjectCode;
             ScheduleRec."Project Name" := Projectname;
             ScheduleRec.UnitNo := UnitCode;

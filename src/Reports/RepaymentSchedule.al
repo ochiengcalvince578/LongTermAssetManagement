@@ -30,6 +30,10 @@ Report 50016 "Repyament Schedule"
 
             column(Project_Name; "Project Name") { }
 
+            column(Customer_No_; "Customer No.") { }
+
+            column(Customer_Name; "Customer Name") { }
+
         }
     }
 
