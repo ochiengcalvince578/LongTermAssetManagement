@@ -405,8 +405,6 @@ page 50004 "Block Card"
             // Error('Units have already been generated for block %1. Delete existing units first.', Rec.No)
             ExistingUnit.DeleteAll();
 
-
-
         NextNo := 1;
 
         // Townhouses

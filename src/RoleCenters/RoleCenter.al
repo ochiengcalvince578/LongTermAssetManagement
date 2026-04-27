@@ -200,7 +200,6 @@ Page 50008 "Main Role Center"
                     {
                         action("Active Sales")
                         {
-
                             RunObject = Page "Property Purchase List";
                             RunPageView = where(Posted = CONST(FALSE));
                         }
@@ -210,6 +209,8 @@ Page 50008 "Main Role Center"
                             RunObject = Page "Property Purchase List";
                             RunPageView = where(Posted = CONST(TRUE));
                         }
+
+
 
                         // action("Rent To Own")
                         // {
@@ -238,6 +239,13 @@ Page 50008 "Main Role Center"
                 {
 
                 }
+
+                group("Sales and Commissions")
+
+                {
+
+                }
+
 
             }
 

@@ -34,6 +34,16 @@ table 50016 "Repayment Schedule"
         field(12; "Customer No."; Code[20]) { }
 
         field(13; "Customer Name"; Text[100]) { }
+
+        field(14; "Default Amount 1m"; Decimal) { }
+
+        field(15; "Default Amount 2m"; Decimal) { }
+
+        field(16; "Default Amount 3m"; Decimal) { }
+
+        field(17; "Default Amount 3m+"; Decimal) { }
+
+        field(18; "Amount in Default"; Decimal) { }
     }
 
     keys
