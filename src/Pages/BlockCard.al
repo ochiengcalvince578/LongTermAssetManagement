@@ -14,7 +14,6 @@ page 50004 "Block Card"
         {
 
             group(General)
-
             {
 
                 field(No; Rec.No)
@@ -223,7 +222,6 @@ page 50004 "Block Card"
 
             action("Generate Units")
             {
-
                 ApplicationArea = All;
                 Promoted = true;
                 PromotedCategory = Process;
@@ -234,26 +232,17 @@ page 50004 "Block Card"
                 var
 
                 begin
-
-
                     GenerateUnits();
-
                     Message('Units created successfully');
-
-
                 end;
-
             }
 
             action("Property Units")
             {
-
                 ApplicationArea = All;
                 Promoted = true;
                 PromotedCategory = Process;
                 PromotedIsBig = true;
-
-
                 trigger OnAction()
 
                 var
@@ -262,16 +251,43 @@ page 50004 "Block Card"
 
                     UnitRec.Reset();
                     UnitRec.SetRange("Block No", Rec.No);
-
                     //if UnitRec.FindFirst() then
                     Page.Run(50007, UnitRec);
+                end;
+            }
+        }
 
+
+        area(Reporting)
+        {
+
+            action("Portfolio")
+            {
+
+                ApplicationArea = All;
+                Promoted = true;
+                PromotedCategory = Report;
+                PromotedIsBig = true;
+
+
+                trigger OnAction()
+
+                var
+                    ProjectRec: Record Block;
+
+                begin
+
+                    ProjectRec.Reset();
+
+                    ProjectRec.SetRange(No, Rec.No);
+
+                    If ProjectRec.FindFirst() then begin
+
+                        Report.Run(50023, true, false, ProjectRec);
+                    end;
                 end;
 
-
             }
-
-
         }
     }
 

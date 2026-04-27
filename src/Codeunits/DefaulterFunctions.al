@@ -1,6 +1,13 @@
 Codeunit 50022 "Defaulter Functions"
 {
 
+    trigger OnRun()
+
+    begin
+
+        RunDefaulterJob();
+    end;
+
 
     var
 

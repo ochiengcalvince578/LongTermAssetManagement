@@ -228,6 +228,7 @@ page 50021 "Receipt Header"
         GenJournalLine."Document No." := rec."No.";
         GenJournalLine."Document Date" := rEC."Posting Date";
 
+
         GenJournalLine.Insert();
 
 
@@ -252,6 +253,9 @@ page 50021 "Receipt Header"
             GenJournalLine."Document Date" := rEC."Posting Date";
 
             GenJournalLine."Document No." := rec."No.";
+
+            GenJournalLine."Project No." := ReceiptLines2."Project No.";
+            GenJournalLine."Unit No." := ReceiptLines2."Unit No.";
 
             GenJournalLine.Insert();
         end;

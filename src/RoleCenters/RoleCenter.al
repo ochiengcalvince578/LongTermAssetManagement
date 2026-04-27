@@ -95,6 +95,16 @@ Page 50008 "Main Role Center"
 
             }
 
+            group("Employee Management")
+            {
+                action("Employees1")
+                {
+                    Caption = 'Employees';
+                    RunObject = Page "Employee List"
+;
+                }
+            }
+
             group("Finance Management")
             {
 
@@ -244,6 +254,20 @@ Page 50008 "Main Role Center"
 
                 {
 
+                }
+
+                group("Defaulter Management")
+                {
+
+                    action("Defaulter List")
+                    {
+                        RunObject = Report "Defaulter List";
+                    }
+
+                    action("Trigger Defaulter Calculation")
+                    {
+                        RunObject = codeunit "Defaulter Functions";
+                    }
                 }
 
 

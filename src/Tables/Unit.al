@@ -70,6 +70,27 @@ table 50005 Unit
         }
 
 
+        field(12; "Customer Name"; Text[100])
+        {
+
+        }
+
+        field(13; "Customer No."; Code[20])
+        {
+
+        }
+
+        field(14; "Responsible Person"; Text[100])
+        {
+
+        }
+
+        field(15; "Responsible Person No."; Code[20])
+        {
+
+        }
+
+
     }
 
     Keys

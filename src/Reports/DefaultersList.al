@@ -17,6 +17,8 @@ Report 50021 "Defaulter List"
 
             column(Customer_No_; "Customer No.") { }
 
+            column(Customer_Name; "Customer Name") { }
+
             column(Amount_in_Default; "Amount in Default")
             {
 
