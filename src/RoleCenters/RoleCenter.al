@@ -106,6 +106,7 @@ Page 50008 "Main Role Center"
                         ApplicationArea = Basic, Suite;
                         Image = Receipt;
                         RunObject = page "Receipt List";
+                        RunPageView = where(Posted = const(false));
                     }
 
                     action("Posted Receipt List")

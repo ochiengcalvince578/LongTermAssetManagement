@@ -118,6 +118,7 @@ page 50012 "Property Sale Card"
                 Promoted = True;
                 PromotedCategory = Process;
                 ApplicationArea = All;
+                Enabled = not Rec.Posted;
 
                 trigger OnAction()
 

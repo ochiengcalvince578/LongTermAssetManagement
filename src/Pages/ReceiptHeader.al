@@ -75,6 +75,7 @@ page 50021 "Receipt Header"
                 Promoted = True;
                 PromotedCategory = Process;
                 ApplicationArea = All;
+                Enabled = not Rec.Posted;
 
                 trigger OnAction()
 
@@ -109,6 +110,8 @@ page 50021 "Receipt Header"
                     If (Rec.Amount <> ReceiptLinesTotal) then
                         Error('The total amount in the receipt lines must equal the header amount');
 
+
+                    InsertReceiptLines();
 
                     GenJournalLine.Reset;
                     GenJournalLine.SetRange("Journal Template Name", 'GENERAL');
@@ -159,12 +162,14 @@ page 50021 "Receipt Header"
                                                     AmountToPay := ReceiptLineBalance;
                                                 end;
                                                 ReceiptLineBalance := ReceiptLineBalance - AmountToPay;
+                                                LoanSheduleRec."Repayed Amount" += AmountToPay;
+                                                LoanSheduleRec.Modify();
                                             end;
 
-                                        until LoanSheduleRec.Next() = 0;
+
+                                        until LoanSheduleRec.Next() = 0; // or until Line balance is 0
                                     end;
 
-                                    LoanSheduleRec.Modify();
                                 until ReceiptLinesRec.Next() = 0;
                             end
 
@@ -197,6 +202,15 @@ page 50021 "Receipt Header"
 
     begin
 
+
+        GenJournalLine.Reset();
+
+        GenJournalLine.SetRange("Journal Template Name", 'GENERAL');
+        GenJournalLine.SetRange("Journal Batch Name", 'DEFAULT');
+
+        If GenJournalLine.FindSET() then
+            GenJournalLine.DeleteAll();
+
         //insert bank debit lump
         LineNo := LineNo + 10000;
 
@@ -210,6 +224,8 @@ page 50021 "Receipt Header"
         //GenJournalLine.Description := ReceiptLines2.Description;
         GenJournalLine."Document Type" := GenJournalLine."Document Type"::" ";
         GenJournalLine."Posting Date" := Rec."Posting Date";
+
+        GenJournalLine."Document No." := rec."No.";
         GenJournalLine."Document Date" := rEC."Posting Date";
 
         GenJournalLine.Insert();
@@ -235,6 +251,8 @@ page 50021 "Receipt Header"
             GenJournalLine."Posting Date" := Rec."Posting Date";
             GenJournalLine."Document Date" := rEC."Posting Date";
 
+            GenJournalLine."Document No." := rec."No.";
+
             GenJournalLine.Insert();
         end;
 
@@ -246,5 +264,11 @@ page 50021 "Receipt Header"
 
         LoanSheduleRec: Record "Repayment Schedule";
 
+
+    trigger OnOpenPage()
+    begin
+
+        Editable := not Rec.Posted;
+    end;
 
 }
