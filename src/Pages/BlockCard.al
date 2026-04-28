@@ -462,6 +462,7 @@ page 50004 "Block Card"
         Unit.No := Format(No);
         Unit.Type := UnitType;
         Unit."Block No" := BlockNo;
+        Unit."Project Name" := Rec.Description; // blockname or projectname
         Unit.Price := Price;
         Unit."Electricity Charge" := ElectricityCharge;
         Unit."Water Charge" := WaterCharge;

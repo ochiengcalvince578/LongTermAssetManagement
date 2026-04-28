@@ -57,6 +57,12 @@ page 50012 "Property Sale Card"
 
                 }
 
+                field("Responsible Employee Name"; Rec."Responsible Employee Name")
+
+                {
+
+                }
+
                 field("Bank Account Code"; Rec."Bank Account Code")
                 {
 
@@ -277,6 +283,11 @@ page 50012 "Property Sale Card"
                 GnJournalLine."Document No." := Rec.No;
 
 
+                //  GnJournalLine."Project No." := rEC."Project No";
+                //GnJournalLine."Unit No." := Rec."Unit No.";
+
+
+
                 GnJournalLine.Insert();
 
                 //CREDIT INVENTORY
@@ -297,6 +308,11 @@ page 50012 "Property Sale Card"
 
                 GnJournalLine."Document Type" := GnJournalLine."Document Type"::" ";
                 GnJournalLine."Document No." := Rec.No;
+
+
+                GnJournalLine."Project No." := rEC."Project No";
+                GnJournalLine."Unit No." := Rec."Unit No.";
+
 
                 GnJournalLine.Insert();
 
@@ -420,11 +436,16 @@ page 50012 "Property Sale Card"
                 GnJournalLine."Document Type" := GnJournalLine."Document Type"::" ";
                 GnJournalLine."Document No." := Rec.No;
 
+
+                GnJournalLine."Project No." := rEC."Project No";
+                GnJournalLine."Unit No." := Rec."Unit No.";
+
+
                 GnJournalLine.Insert();
 
 
 
-                // DEBIT 75% TO THE INVENTORY
+                // DEBIT 75% TO THE RECEIVABLES
 
                 LineNo := LineNo + 10000;
 
@@ -442,6 +463,12 @@ page 50012 "Property Sale Card"
 
                 GnJournalLine."Document Type" := GnJournalLine."Document Type"::" ";
                 GnJournalLine."Document No." := Rec.No;
+
+
+
+
+                GnJournalLine."Project No." := rEC."Project No";
+                GnJournalLine."Unit No." := Rec."Unit No.";
 
 
                 GnJournalLine.Insert();
@@ -571,6 +598,12 @@ page 50012 "Property Sale Card"
 
             If UnitRec.Get(Rec."Unit No.", Rec."Project No") then begin
                 UnitRec.Status := Status;
+
+                UnitRec."Customer No." := Rec."Customer No";
+                UnitRec."Customer Name" := Rec."Customer Name";
+                UnitRec."Responsible Person No." := Rec."Responsible Employee";
+                UnitRec."Responsible Person" := Rec."Responsible Employee Name";
+
                 UnitRec.Modify();
             end else begin
 

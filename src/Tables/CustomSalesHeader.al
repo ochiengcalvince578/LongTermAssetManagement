@@ -81,6 +81,25 @@ table 50011 "Custom Sales Header"
         field(12; "Responsible Employee"; Code[20])
         {
             TableRelation = Employee;
+
+            trigger OnValidate()
+
+            var
+
+                EmployeeRec: Record Employee;
+
+            begin
+
+
+                EmployeeRec.Reset();
+
+                EmployeeRec.SetRange("No.", "Responsible Employee");
+
+                if EmployeeRec.FindFirst() then
+                    "Responsible Employee Name" := EmployeeRec."Search Name";
+
+
+            end;
         }
 
         field(13; "Bank Account Code"; Code[20])
@@ -135,6 +154,11 @@ table 50011 "Custom Sales Header"
             //TableRelation = Unit;
             TableRelation = Unit where("Block No" = field("Project No"), Status = const(Available));
 
+        }
+
+        field(19; "Responsible Employee Name"; Text[100])
+        {
+            Editable = FALSE;
         }
 
     }

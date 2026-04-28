@@ -168,8 +168,6 @@ Page 50008 "Main Role Center"
                         Caption = 'G/L Navigator';
                         Image = Journal;
                         RunObject = Page Navigate;
-
-
                     }
                     action("Account Categories")
                     {
@@ -200,7 +198,7 @@ Page 50008 "Main Role Center"
                         {
                             Caption = 'Units';
                             RunObject = Page "Unit List";
-                            Visible = false;
+                            Visible = true;
                         }
 
                     }

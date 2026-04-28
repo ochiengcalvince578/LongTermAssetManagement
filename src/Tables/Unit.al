@@ -90,6 +90,11 @@ table 50005 Unit
 
         }
 
+        field(16; "Project Name"; Text[100])
+        {
+
+        }
+
 
     }
 

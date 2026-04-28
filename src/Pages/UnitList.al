@@ -4,6 +4,7 @@ page 50007 "Unit List"
 {
     ApplicationArea = aLL;
     PageType = List;
+    CardPageId = "Unit Card";
     SourceTable = Unit;
 
 
