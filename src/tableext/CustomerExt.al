@@ -8,17 +8,44 @@ tableextension 50002 CustomerExt extends Customer
     fields
     {
 
-        field(5000; KRAPinDoc; Media)
+
+
+        field(5000; KRAPinDoc; Blob)
+        {
+
+        }
+        field(5001; AtmDoc; Blob)
         {
 
         }
 
-        field(5001; AtmDoc; Media)
+        field(5002; IdentityDocFront; Blob)
         {
 
         }
 
-        field(5002; IdentityDoc; Media)
+        field(5003; "KRA Pin"; Code[11])
+        {
+
+        }
+
+        field(5004; "Id No."; Code[10])
+        {
+
+        }
+
+        field(5005; "Passport No."; Code[20])
+        {
+
+        }
+
+        field(5006; "ATM No."; Code[20])
+        {
+
+        }
+
+
+        field(5007; IdentityDocBack; Blob)
         {
 
         }

@@ -24,88 +24,6 @@
       <rd:DataSourceID>d5511def-fe31-48da-9454-13bdeef212ae</rd:DataSourceID>
     </DataSource>
   </DataSources>
-  <DataSets>
-    <DataSet Name="DataSet_Result">
-      <Query>
-        <DataSourceName>DataSource</DataSourceName>
-        <CommandText />
-      </Query>
-      <Fields>
-        <Field Name="No">
-          <DataField>No</DataField>
-        </Field>
-        <Field Name="Block_No">
-          <DataField>Block_No</DataField>
-        </Field>
-        <Field Name="Price">
-          <DataField>Price</DataField>
-        </Field>
-        <Field Name="PriceFormat">
-          <DataField>PriceFormat</DataField>
-        </Field>
-        <Field Name="Status">
-          <DataField>Status</DataField>
-        </Field>
-        <Field Name="Stage">
-          <DataField>Stage</DataField>
-        </Field>
-        <Field Name="Water_Charge">
-          <DataField>Water_Charge</DataField>
-        </Field>
-        <Field Name="Water_ChargeFormat">
-          <DataField>Water_ChargeFormat</DataField>
-        </Field>
-        <Field Name="Electricity_Charge">
-          <DataField>Electricity_Charge</DataField>
-        </Field>
-        <Field Name="Electricity_ChargeFormat">
-          <DataField>Electricity_ChargeFormat</DataField>
-        </Field>
-        <Field Name="Legal_Expense">
-          <DataField>Legal_Expense</DataField>
-        </Field>
-        <Field Name="Legal_ExpenseFormat">
-          <DataField>Legal_ExpenseFormat</DataField>
-        </Field>
-        <Field Name="Customer_No_">
-          <DataField>Customer_No_</DataField>
-        </Field>
-        <Field Name="Customer_Name">
-          <DataField>Customer_Name</DataField>
-        </Field>
-        <Field Name="Responsible_Person">
-          <DataField>Responsible_Person</DataField>
-        </Field>
-        <Field Name="Responsible_Person_No_">
-          <DataField>Responsible_Person_No_</DataField>
-        </Field>
-        <Field Name="Project_Name">
-          <DataField>Project_Name</DataField>
-        </Field>
-        <Field Name="Debit_Amount">
-          <DataField>Debit_Amount</DataField>
-        </Field>
-        <Field Name="Debit_AmountFormat">
-          <DataField>Debit_AmountFormat</DataField>
-        </Field>
-        <Field Name="Posting_Date">
-          <DataField>Posting_Date</DataField>
-        </Field>
-        <Field Name="Credit_Amount">
-          <DataField>Credit_Amount</DataField>
-        </Field>
-        <Field Name="Credit_AmountFormat">
-          <DataField>Credit_AmountFormat</DataField>
-        </Field>
-        <Field Name="Description">
-          <DataField>Description</DataField>
-        </Field>
-        <Field Name="Document_No_">
-          <DataField>Document_No_</DataField>
-        </Field>
-      </Fields>
-    </DataSet>
-  </DataSets>
   <ReportSections>
     <ReportSection>
       <Body>
@@ -844,12 +762,6 @@
       </Page>
     </ReportSection>
   </ReportSections>
-  <ReportParametersLayout>
-    <GridLayoutDefinition>
-      <NumberOfColumns>4</NumberOfColumns>
-      <NumberOfRows>2</NumberOfRows>
-    </GridLayoutDefinition>
-  </ReportParametersLayout>
   <Code>Public Function BlankZero(ByVal Value As Decimal)
     if Value = 0 then
         Return ""
@@ -887,4 +799,86 @@ End Function
 </Code>
   <Language>=User!Language</Language>
   <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="No">
+          <DataField>No</DataField>
+        </Field>
+        <Field Name="Block_No">
+          <DataField>Block_No</DataField>
+        </Field>
+        <Field Name="Price">
+          <DataField>Price</DataField>
+        </Field>
+        <Field Name="PriceFormat">
+          <DataField>PriceFormat</DataField>
+        </Field>
+        <Field Name="Status">
+          <DataField>Status</DataField>
+        </Field>
+        <Field Name="Stage">
+          <DataField>Stage</DataField>
+        </Field>
+        <Field Name="Water_Charge">
+          <DataField>Water_Charge</DataField>
+        </Field>
+        <Field Name="Water_ChargeFormat">
+          <DataField>Water_ChargeFormat</DataField>
+        </Field>
+        <Field Name="Electricity_Charge">
+          <DataField>Electricity_Charge</DataField>
+        </Field>
+        <Field Name="Electricity_ChargeFormat">
+          <DataField>Electricity_ChargeFormat</DataField>
+        </Field>
+        <Field Name="Legal_Expense">
+          <DataField>Legal_Expense</DataField>
+        </Field>
+        <Field Name="Legal_ExpenseFormat">
+          <DataField>Legal_ExpenseFormat</DataField>
+        </Field>
+        <Field Name="Customer_No_">
+          <DataField>Customer_No_</DataField>
+        </Field>
+        <Field Name="Customer_Name">
+          <DataField>Customer_Name</DataField>
+        </Field>
+        <Field Name="Responsible_Person">
+          <DataField>Responsible_Person</DataField>
+        </Field>
+        <Field Name="Responsible_Person_No_">
+          <DataField>Responsible_Person_No_</DataField>
+        </Field>
+        <Field Name="Project_Name">
+          <DataField>Project_Name</DataField>
+        </Field>
+        <Field Name="Debit_Amount">
+          <DataField>Debit_Amount</DataField>
+        </Field>
+        <Field Name="Debit_AmountFormat">
+          <DataField>Debit_AmountFormat</DataField>
+        </Field>
+        <Field Name="Posting_Date">
+          <DataField>Posting_Date</DataField>
+        </Field>
+        <Field Name="Credit_Amount">
+          <DataField>Credit_Amount</DataField>
+        </Field>
+        <Field Name="Credit_AmountFormat">
+          <DataField>Credit_AmountFormat</DataField>
+        </Field>
+        <Field Name="Description">
+          <DataField>Description</DataField>
+        </Field>
+        <Field Name="Document_No_">
+          <DataField>Document_No_</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
 </Report>
