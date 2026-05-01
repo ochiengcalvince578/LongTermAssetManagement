@@ -70,4 +70,14 @@ table 50019 "Receipt Header"
 
         }
     }
+
+    trigger OnInsert()
+    begin
+
+        "No." := NoSeriesMgmt.GetNextNo('RCPT');
+    end;
+
+    var
+
+        NoSeriesMgmt: Codeunit "No. Series";
 }

@@ -163,4 +163,15 @@ table 50011 "Custom Sales Header"
 
     }
 
+    trigger OnInsert()
+
+    begin
+
+        "No" := NoSeriesMgmt.GetNextNo('SALE');
+    end;
+
+    var
+
+        NoSeriesMgmt: Codeunit "No. Series";
+
 }

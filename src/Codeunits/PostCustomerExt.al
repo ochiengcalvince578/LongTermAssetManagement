@@ -5,11 +5,18 @@ Codeunit 50023 "Post-Customer Extension"
     procedure InsertCustomTransactionFields(GenJournalLine: Record "Gen. Journal Line"; var CustLedgerEntry: Record "Cust. Ledger Entry")
     var
         cust: Record Customer;
+
     begin
         CustLedgerEntry.LockTable();
 
         CustLedgerEntry."Unit No." := GenJournalLine."Unit No.";
         CustLedgerEntry."Project No." := GenJournalLine."Project No.";
     end;
+
+
+    // [EventSubscriber(ObjectType::Codeunit, codeuint::"Gen. Jnl.Post Line". 'OnBeforePostGenJnlLine', '', false, false)]
+    // procedure InsertCustomGenJournalFields(GenJournal)
+
+
 
 }

@@ -82,6 +82,11 @@ Page 50008 "Main Role Center"
                 {
                     RunObject = Page "General Setup";
                 }
+
+                action("No. Series")
+                {
+                    RunObject = page "No. Series";
+                }
             }
 
             group("Customer Management")

@@ -77,7 +77,28 @@ Report 50025 "Unit Transactions"
 
                 column(Document_No_; "Document No.") { }
 
+                column(Balance; Balance) { }
+
+                trigger OnAfterGetRecord()
+                begin
+
+                    TotalDue += "Debit Amount";
+
+                    TotalPaid += "Credit Amount";
+
+                    Balance := TotalDue - TotalPaid;
+                end;
+
             }
+
+            trigger OnAfterGetRecord()
+            begin
+
+                TotalDUe := 0;
+                TotalPaid := 0;
+                Balance := 0;
+
+            end;
 
 
         }
@@ -87,4 +108,6 @@ Report 50025 "Unit Transactions"
 
         TotalDue: Decimal;
         TotalPaid: Decimal;
+
+        Balance: Decimal;
 }

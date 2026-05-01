@@ -436,11 +436,6 @@ page 50012 "Property Sale Card"
                 GnJournalLine."Document Type" := GnJournalLine."Document Type"::" ";
                 GnJournalLine."Document No." := Rec.No;
 
-
-                GnJournalLine."Project No." := rEC."Project No";
-                GnJournalLine."Unit No." := Rec."Unit No.";
-
-
                 GnJournalLine.Insert();
 
 
@@ -452,9 +447,9 @@ page 50012 "Property Sale Card"
                 GnJournalLine."Line No." := LineNo;
                 GnJournalLine."Journal Template Name" := GeneralTemplateName;
                 GnJournalLine."Journal Batch Name" := DefaultBatchName;
-                GnJournalLine."Account Type" := GnJournalLine."Account Type"::"G/L Account";
+                GnJournalLine."Account Type" := GnJournalLine."Account Type"::Customer;
 
-                GnJournalLine."Account No." := RecievablesAccount;
+                GnJournalLine."Account No." := Rec."Customer No";
 
                 GnJournalLine.Description := SalesLines.Description;
                 GnJournalLine."Document Date" := Rec."Posting Date";

@@ -24,6 +24,36 @@ page 50014 "Property Purchase List"
 
                 }
 
+                field("Customer Name"; Rec."Customer Name")
+                {
+
+                }
+
+                field("Project No"; Rec."Project No")
+                {
+
+                }
+
+                field("Project Name"; Rec."Project Name")
+                {
+
+                }
+
+                field("Unit No."; Rec."Unit No.")
+                {
+
+                }
+
+                field("Responsible Employee"; Rec."Responsible Employee")
+                {
+
+                }
+
+                field("Responsible Employee Name"; Rec."Responsible Employee Name")
+                {
+
+                }
+
                 field(Posted; Rec.Posted)
                 {
 

@@ -1,5 +1,6 @@
 namespace DefaultPublisher;
 using Microsoft.Sales.Customer;
+using Microsoft.Foundation.NoSeries;
 using Microsoft.Finance.GeneralLedger.Account;
 
 table 50003 Block
@@ -160,5 +161,16 @@ table 50003 Block
 
 
     }
+
+    trigger OnInsert()
+    begin
+
+        No := NoSeriesMgmt.GetNextNo('BLOCK');
+    end;
+
+    var
+
+        NoSeriesMgmt: Codeunit "No. Series";
+        NoSeriesRec: Record "No. Series";
 
 }
