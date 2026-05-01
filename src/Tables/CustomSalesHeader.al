@@ -134,6 +134,7 @@ table 50011 "Custom Sales Header"
         field(15; "Repayment Period"; Option)
         {
             OptionMembers = "Monthly","Daily","Annually";
+            InitValue = "Monthly";
 
         }
 

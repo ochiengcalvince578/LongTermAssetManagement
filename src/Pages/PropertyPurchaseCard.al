@@ -81,7 +81,7 @@ page 50012 "Property Sale Card"
 
             }
 
-            group("Loan Details")
+            group("Payment Schedule Details")
             {
 
                 field("Interest Rate"; Rec."Interest Rate")
@@ -153,7 +153,7 @@ page 50012 "Property Sale Card"
                         GeneralJournalHelper(UnitRec.Status::Active);
                     end else if Rec."Purchase Option" = Rec."Purchase Option"::"Cash Deposit" then begin
 
-                        //FnInsertCashDepositLines
+                        FnInsertCashDepositLines
                         //GeneralJournalHelper(UnitRec.Status::Active);
                     end else if Rec."Purchase Option" = Rec."Purchase Option"::"Outright Sale" then begin
                         FnInsertLines();
@@ -199,9 +199,15 @@ page 50012 "Property Sale Card"
 
     }
 
-    local procedure FnCashDepositLines()
 
+    local procedure FnInsertCashDepositLines()
+
+    var
+        LoanAmount: Decimal;
+        UnitRec99: Record Unit;
     begin
+
+        Rec.TestField(Installments);
 
         if CustomerPostingGroup.Get(Rec."Project No") then begin
             RecievablesAccount := CustomerPostingGroup."Receivables Account";
@@ -222,11 +228,145 @@ page 50012 "Property Sale Card"
 
                 Error('Posting had to stop. An Inventory G/L Account is missing');
             end;
+
+
+            UnitRec99.Reset();
+            UnitRec99.SetRange("Block No", Rec."Project No");
+            UnitRec99.SetRange(No, Rec."Unit No.");
+
+
+            if UnitRec99.FindFirst() then begin
+
+                LoanAmount := UnitRec99.Price * 0.75;
+
+                FnCreatePaymentSchedule(LoanAmount, Rec.Installments, ProjectRec.No, Rec."Unit No.", Rec."Posting Date", Rec."Project Name", Rec."Customer No", Rec."Customer Name");
+
+            end;
+
         end else begin
             Error('Posting had to stop. We couldnt fetch the project record.');
         end;
 
+
+        GnJournalLine.Reset();
+
+        GnJournalLine.SetRange("Journal Template Name", 'GENERAL');
+        GnJournalLine.SetRange("Journal Batch Name", 'DEFAULT');
+
+        If GnJournalLine.FindSet() then
+            GnJournalLine.DeleteAll();
+
+
+        SalesLines.Reset();
+        SalesLines.SetRange("Transaction No", rEC.No);
+
+        If SalesLines.FindSet() then begin
+
+            repeat
+
+                // DEBIT 10% TO THE BANK
+
+                LineNo := LineNo + 10000;
+
+                GnJournalLine."Line No." := LineNo;
+                GnJournalLine."Journal Template Name" := GeneralTemplateName;
+                GnJournalLine."Journal Batch Name" := DefaultBatchName;
+                GnJournalLine."Account Type" := GnJournalLine."Account Type"::"Bank Account";
+
+                GnJournalLine."Account No." := Rec."Bank Account Code";
+
+                GnJournalLine.Description := SalesLines.Description;
+                GnJournalLine."Document Date" := Rec."Posting Date";
+                GnJournalLine."Posting Date" := Rec."Posting Date";
+                GnJournalLine.Amount := (0.10 * SalesLines.Amount);
+
+                GnJournalLine."Document Type" := GnJournalLine."Document Type"::" ";
+                GnJournalLine."Document No." := Rec.No;
+
+
+                GnJournalLine.Insert();
+
+
+                //CREDIT 10% TO THE INVENTORY
+
+                LineNo := LineNo + 10000;
+
+                GnJournalLine."Line No." := LineNo;
+                GnJournalLine."Journal Template Name" := GeneralTemplateName;
+                GnJournalLine."Journal Batch Name" := DefaultBatchName;
+                GnJournalLine."Account Type" := GnJournalLine."Account Type"::"G/L Account";
+
+                GnJournalLine."Account No." := InventoryAccount;
+
+                GnJournalLine."Document Date" := Rec."Posting Date";
+                GnJournalLine."Posting Date" := Rec."Posting Date";
+                GnJournalLine.Amount := (0.10 * SalesLines.Amount) * -1;
+
+
+                GnJournalLine."Document Type" := GnJournalLine."Document Type"::" ";
+                GnJournalLine."Document No." := Rec.No;
+
+                GnJournalLine.Insert();
+
+
+
+                // DEBIT 90% TO THE RECEIVABLES
+
+                LineNo := LineNo + 10000;
+
+                GnJournalLine."Line No." := LineNo;
+                GnJournalLine."Journal Template Name" := GeneralTemplateName;
+                GnJournalLine."Journal Batch Name" := DefaultBatchName;
+                GnJournalLine."Account Type" := GnJournalLine."Account Type"::Customer;
+
+                GnJournalLine."Account No." := Rec."Customer No";
+
+                GnJournalLine.Description := SalesLines.Description;
+                GnJournalLine."Document Date" := Rec."Posting Date";
+                GnJournalLine."Posting Date" := Rec."Posting Date";
+                GnJournalLine.Amount := (0.90 * SalesLines.Amount);
+
+                GnJournalLine."Document Type" := GnJournalLine."Document Type"::" ";
+                GnJournalLine."Document No." := Rec.No;
+
+
+
+
+                GnJournalLine."Project No." := rEC."Project No";
+                GnJournalLine."Unit No." := Rec."Unit No.";
+
+
+                GnJournalLine.Insert();
+
+
+                // CREDIT 90% TO THE INVENTORY
+
+                LineNo := LineNo + 10000;
+
+                GnJournalLine."Line No." := LineNo;
+                GnJournalLine."Journal Template Name" := GeneralTemplateName;
+                GnJournalLine."Journal Batch Name" := DefaultBatchName;
+                GnJournalLine."Account Type" := GnJournalLine."Account Type"::"G/L Account";
+
+                GnJournalLine."Account No." := RecievablesAccount;
+
+                GnJournalLine.Description := SalesLines.Description;
+                GnJournalLine."Document Date" := Rec."Posting Date";
+                GnJournalLine."Posting Date" := Rec."Posting Date";
+                GnJournalLine.Amount := (0.90 * SalesLines.Amount) * -1;
+
+                GnJournalLine."Document Type" := GnJournalLine."Document Type"::" ";
+                GnJournalLine."Document No." := Rec.No;
+
+                GnJournalLine.Insert();
+
+            until SalesLines.Next() = 0;
+
+        end;
+
     end;
+
+
 
     local procedure FnInsertLines()
 
@@ -496,8 +636,57 @@ page 50012 "Property Sale Card"
 
     end;
 
+    local procedure FnCreatePaymentSchedule(LoanAmount: Decimal; Installments: Integer; ProjectCode: Code[20]; UnitCode: Code[20]; RepaymentStartDate: Date; ProjectName: Text[100]; CustomerNo: Code[20]; CustomerName: Text[100])
+    var
+
+        ScheduleRec: Record "Repayment Schedule";
+        i: Integer;
+        Repayment: Decimal;
+        Principal: Decimal;
+        Interest: Decimal;
+        RepaymentDate: Date;
+        Balance: Decimal;
+
+    begin
+
+        Repayment := Round(LoanAmount / Installments, 1, '>');
+
+        RepaymentDate := RepaymentStartDate;
+
+        Balance := LoanAmount;
+
+        for i := 1 to Installments do begin
+
+            Principal := Repayment;
+            Interest := Repayment - Principal;
+
+            RepaymentStartDate := CalcDate('1M', RepaymentStartDate);
+
+            ScheduleRec.Init();
+            ScheduleRec.No := i;
+            ScheduleRec."Customer No." := CustomerNo;
+            ScheduleRec."Customer Name" := CustomerName;
+            ScheduleRec.ProjectNo := ProjectCode;
+            ScheduleRec."Project Name" := ProjectName;
+            ScheduleRec.UnitNo := UnitCode;
+
+            ScheduleRec."Repayment Amount" := Repayment;
+            ScheduleRec.Principal := Principal;
+            ScheduleRec.Interest := Interest;
+            ScheduleRec."Repayment Date" := RepaymentStartDate;
+
+            ScheduleRec."Loan Balance" := Balance;
+
+            Balance := Balance - Repayment;
+
+            ScheduleRec.Insert();
+        end;
+
+    end;
+
 
     local procedure FnCreatePaymentSchedule(LoanAmount: Decimal; Installments: Integer; InterestRate: Decimal; ProjectCode: Code[20]; UnitCode: Code[20]; RepaymentStartDate: Date; Projectname: Text[100]; CustomerNo: Code[20]; CustomerName: Text[100])
+
 
     var
 
