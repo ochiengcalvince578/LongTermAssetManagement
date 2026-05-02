@@ -190,12 +190,19 @@ page 50004 "Block Card"
             group("General Ledger Setup")
             {
 
-                field("Inventory Account"; Rec."Inventory Account")
+                // field("Inventory Account"; Rec."Inventory Account")
+                // {
+
+                //     ShowMandatory = true;
+
+                // }
+
+                field("Property Posting Group"; Rec."Property Posting Group")
                 {
-
                     ShowMandatory = true;
-
                 }
+
+
 
                 field("Customer Posting Group"; Rec."Customer Posting Group")
                 {

@@ -38,9 +38,14 @@ table 50003 Block
             TableRelation = "Customer Posting Group";
         }
 
-        field(6; "Inventory Account"; Code[30])
+        // field(6; "Inventory Account"; Code[30])
+        // {
+        //     TableRelation = "G/L Account";
+        // }
+
+        field(6; "Property Posting Group"; Code[30])
         {
-            TableRelation = "G/L Account";
+            TableRelation = "Property Posting Group";
         }
 
         field(7; "Income Account"; Code[30])

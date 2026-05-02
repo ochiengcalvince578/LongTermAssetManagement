@@ -153,8 +153,8 @@ page 50012 "Property Sale Card"
                         GeneralJournalHelper(UnitRec.Status::Active);
                     end else if Rec."Purchase Option" = Rec."Purchase Option"::"Cash Deposit" then begin
 
-                        FnInsertCashDepositLines
-                        //GeneralJournalHelper(UnitRec.Status::Active);
+                        FnInsertCashDepositLines();
+                        GeneralJournalHelper(UnitRec.Status::Active);
                     end else if Rec."Purchase Option" = Rec."Purchase Option"::"Outright Sale" then begin
                         FnInsertLines();
                         GeneralJournalHelper(UnitRec.Status::Complete);
@@ -221,13 +221,23 @@ page 50012 "Property Sale Card"
 
         If ProjectRec.FindFirst() then begin
 
-            If ProjectRec."Inventory Account" <> '' then begin
 
-                InventoryAccount := ProjectRec."Inventory Account";
+            If ProjectRec."Property Posting Group" <> '' then begin
+
+                If PropertyPG.Get(ProjectRec."Property Posting Group") then begin
+                    InventoryAccount := PropertyPG."Inventory Account";
+
+                end else begin
+                    Error('The Inventory/WIP Account is missing')
+                end;
+
             end else begin
 
-                Error('Posting had to stop. An Inventory G/L Account is missing');
+                Error('Posting had to stop. The Project Posting Group is missing');
+
             end;
+
+
 
 
             UnitRec99.Reset();
@@ -372,27 +382,23 @@ page 50012 "Property Sale Card"
 
     begin
 
-        if CustomerPostingGroup.Get(Rec."Project No") then begin
-            RecievablesAccount := CustomerPostingGroup."Receivables Account";
-        end else begin
-            Error('Posting had to stop. A Customer Posting Posting Group is missing.');
-        end;
-
 
         ProjectRec.Reset();
         ProjectRec.SetRange(No, Rec."Project No");
 
-        If ProjectRec.FindFirst() then begin
+        If ProjectRec."Property Posting Group" <> '' then begin
 
-            If ProjectRec."Inventory Account" <> '' then begin
+            If PropertyPG.Get(ProjectRec."Property Posting Group") then begin
+                InventoryAccount := PropertyPG."Inventory Account";
 
-                InventoryAccount := ProjectRec."Inventory Account";
             end else begin
-
-                Error('Posting had to stop. An Inventory G/L Account is missing');
+                Error('The Inventory/WIP Account is missing')
             end;
+
         end else begin
-            Error('Posting had to stop. We couldnt fetch the project record.');
+
+            Error('Posting had to stop. The Project Posting Group is missing');
+
         end;
 
 
@@ -476,29 +482,29 @@ page 50012 "Property Sale Card"
     begin
 
         Rec.TestField("Interest Rate");
-        //  Rec.TestField("Repayment Period");
+        //Rec.TestField("Repayment Period");
         Rec.TestField(Installments);
-
-        if CustomerPostingGroup.Get(Rec."Project No") then begin
-            RecievablesAccount := CustomerPostingGroup."Receivables Account";
-        end else begin
-            Error('Posting had to stop. A Customer Posting Posting Group is missing.');
-        end;
-
 
         ProjectRec.Reset();
         ProjectRec.SetRange(No, Rec."Project No");
 
         If ProjectRec.FindFirst() then begin
 
-            If ProjectRec."Inventory Account" <> '' then begin
 
-                InventoryAccount := ProjectRec."Inventory Account";
+            If ProjectRec."Property Posting Group" <> '' then begin
+
+                If PropertyPG.Get(ProjectRec."Property Posting Group") then begin
+                    InventoryAccount := PropertyPG."Inventory Account";
+
+                end else begin
+                    Error('The Inventory/WIP Account is missing')
+                end;
+
             end else begin
 
-                Error('Posting had to stop. An Inventory G/L Account is missing');
-            end;
+                Error('Posting had to stop. The Project Posting Group is missing');
 
+            end;
 
             UnitRec99.Reset();
             UnitRec99.SetRange("Block No", Rec."Project No");
@@ -776,6 +782,11 @@ page 50012 "Property Sale Card"
         If GeneralJournalLines.FindSet() then begin
             Codeunit.Run(Codeunit::"Gen. Jnl.-Post Batch", GeneralJournalLines);
 
+
+            //InsertProjectLedgerEntries 
+
+
+
             Rec.Posted := true;
             Rec.Modify();
 
@@ -799,6 +810,19 @@ page 50012 "Property Sale Card"
         end
     end;
 
+
+
+
+    // local procedure InsertProperytLedgerEntries() 
+
+    // var
+
+    // PropertyLedgerEntries: Record "Prop. Ledger Entry";
+
+    // begin 
+
+    // end;
+
     var
 
         GeneralTemplateName: Text[50];
@@ -813,6 +837,8 @@ page 50012 "Property Sale Card"
         RecievablesAccount: Code[20];
         InventoryAccount: Code[20];
         LineNo: Integer;
+
+        PropertyPG: Record "Property Posting Group";
 
     trigger OnOpenPage()
     begin
