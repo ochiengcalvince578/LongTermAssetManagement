@@ -17,7 +17,6 @@ page 50029 "Property Posting Group"
                 {
 
                     Caption = 'Code';
-
                 }
 
                 field(Description; Rec.Description)

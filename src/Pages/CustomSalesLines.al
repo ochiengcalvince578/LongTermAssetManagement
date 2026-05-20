@@ -25,7 +25,10 @@ page 50013 "Custom Sales Lines"
 
                 field(Description; Rec.Description) { }
 
-                field("GL Account"; Rec."GL Account") { }
+                field("GL Account"; Rec."GL Account")
+                {
+                    Visible = false;
+                }
 
             }
 

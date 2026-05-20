@@ -17,7 +17,7 @@ page 50015 "Customers Cue"
                     ApplicationArea = All;
                     Style = Favorable;
                     StyleExpr = true;
-                    DrillDownPageId = "Customer List";
+                    DrillDownPageId = "Custom Customer List";
 
                 }
             }

@@ -73,6 +73,8 @@ page 50026 "Custom Customer"
                 field(AtmDoc; Rec.AtmDoc)
                 {
 
+
+
                 }
             }
 
@@ -134,6 +136,7 @@ page 50026 "Custom Customer"
                 Enabled = false;
                 ShowFilter = false;
                 //Visible = ShowWorkflowStatus;
+                Visible = false;
             }
 
         }

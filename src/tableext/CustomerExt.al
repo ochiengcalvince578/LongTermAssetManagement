@@ -13,14 +13,18 @@ tableextension 50002 CustomerExt extends Customer
         field(5000; KRAPinDoc; Blob)
         {
 
+            SubType = Bitmap;
+
         }
         field(5001; AtmDoc; Blob)
         {
+            SubType = Bitmap;
 
         }
 
         field(5002; IdentityDocFront; Blob)
         {
+            SubType = Bitmap;
 
         }
 
@@ -47,6 +51,8 @@ tableextension 50002 CustomerExt extends Customer
 
         field(5007; IdentityDocBack; Blob)
         {
+
+            SubType = Bitmap;
 
         }
 

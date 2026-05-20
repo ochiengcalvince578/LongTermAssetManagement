@@ -169,7 +169,7 @@ page 50012 "Property Sale Card"
         area(Reporting)
         {
 
-            action("Loan Schedule")
+            action("Payment Schedule")
             {
                 Promoted = True;
                 PromotedCategory = Report;
@@ -235,6 +235,20 @@ page 50012 "Property Sale Card"
 
                 Error('Posting had to stop. The Project Posting Group is missing');
 
+            end;
+
+
+
+            If ProjectRec."Customer Posting Group" <> '' then begin
+
+                If CustomerPostingGroup.Get(ProjectRec."Customer Posting Group") then begin
+                    RecievablesAccount := CustomerPostingGroup."Receivables Account";
+                end else begin
+                    Error('The Recievables Account is missing')
+                end;
+
+            end else begin
+                Error('Posting had to stop. The Customer Posting Group is missing');
             end;
 
 
@@ -401,6 +415,18 @@ page 50012 "Property Sale Card"
 
         end;
 
+        If ProjectRec."Customer Posting Group" <> '' then begin
+
+            If CustomerPostingGroup.Get(ProjectRec."Customer Posting Group") then begin
+                RecievablesAccount := CustomerPostingGroup."Receivables Account";
+            end else begin
+                Error('The Recievables Account is missing')
+            end;
+
+        end else begin
+            Error('Posting had to stop. The Customer Posting Group is missing');
+        end;
+
 
 
         SalesLines.Reset();
@@ -490,7 +516,6 @@ page 50012 "Property Sale Card"
 
         If ProjectRec.FindFirst() then begin
 
-
             If ProjectRec."Property Posting Group" <> '' then begin
 
                 If PropertyPG.Get(ProjectRec."Property Posting Group") then begin
@@ -504,6 +529,18 @@ page 50012 "Property Sale Card"
 
                 Error('Posting had to stop. The Project Posting Group is missing');
 
+            end;
+
+            If ProjectRec."Customer Posting Group" <> '' then begin
+
+                If CustomerPostingGroup.Get(ProjectRec."Customer Posting Group") then begin
+                    RecievablesAccount := CustomerPostingGroup."Receivables Account";
+                end else begin
+                    Error('The Recievables Account is missing')
+                end;
+
+            end else begin
+                Error('Posting had to stop. The Customer Posting Group is missing');
             end;
 
             UnitRec99.Reset();
@@ -635,9 +672,7 @@ page 50012 "Property Sale Card"
                 GnJournalLine."Document No." := Rec.No;
 
                 GnJournalLine.Insert();
-
             until SalesLines.Next() = 0;
-
         end;
 
     end;

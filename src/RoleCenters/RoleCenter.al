@@ -87,6 +87,21 @@ Page 50008 "Main Role Center"
                 {
                     RunObject = page "No. Series";
                 }
+
+
+                group("Posting Groups")
+                {
+                    action("Customer Posting Groups")
+                    {
+                        RunObject = page "Customer Posting Groups";
+                    }
+
+                    action("Property Posting Groups")
+                    {
+                        RunObject = page "Property Posting Group";
+                    }
+
+                }
             }
 
             group("Customer Management")
@@ -94,7 +109,8 @@ Page 50008 "Main Role Center"
                 action("Customers")
                 {
                     Caption = 'Customers';
-                    RunObject = Page "Customer List";
+                    //RunObject = Page "Customer List";
+                    RunObject = page "Custom Customer List";
 
                 }
 
